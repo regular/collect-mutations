@@ -1,0 +1,20 @@
+{
+  "name": "collect-mutations",
+  "version": "1.0.0",
+  "description": "Sink ssb-review streams into mutant arrays",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test/*.js"
+  },
+  "keywords": ['ssb', 'ssb-revisions', 'tre', 'mutant'],
+  "author": "Jan Bölsche <jan@lagomorph.de> (https://regular.codes/)",
+  "license": "ISC",
+  "dependencies": {
+    "mutant": "^3.22.1",
+    "pull-stream": "^3.6.9"
+  },
+  "devDependencies": {
+    "multicb": "^1.2.2",
+    "tape": "^4.9.1"
+  }
+}
