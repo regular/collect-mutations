@@ -6,7 +6,13 @@
   "scripts": {
     "test": "tape test/*.js"
   },
-  "keywords": ["ssb", "ssb-revisions", "tre", "mutant", "pull-stream"],
+  "keywords": [
+    "ssb",
+    "ssb-revisions",
+    "tre",
+    "mutant",
+    "pull-stream"
+  ],
   "author": "Jan Bölsche <jan@lagomorph.de> (https://regular.codes/)",
   "license": "ISC",
   "dependencies": {
