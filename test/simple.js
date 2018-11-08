@@ -79,30 +79,35 @@ test('morphing', (t, db) => {
     console.log('dogs', v)
   })
 
-  pull(
-    db.revisions.messagesByType('cat', {live: true, sync: true}),
-    pull.take(3), // sync plus 2
-    collectMutations( cats, {sync: true}, err  => {
-      if (err && err !== true) return cb1(err)
-      t.deepEqual(cats.getLength(), 2)
-      t.deepEqual(cats.get(0)(), a2)
-      t.deepEqual(cats.get(1)(), b)
-      cb1()
-    })
-  )
+  append(db, [a], seqs => {
 
-  pull(
-    db.revisions.messagesByType('dog', {live: true, sync: true}),
-    pull.take(4), // sync plus 3
-    collectMutations( dogs, {sync: true}, err  => {
-      console.log('err', err)
-      if (err && err !== true) return cb2(err)
-      t.deepEqual(dogs.getLength(), 0)
-      cb2()
-    })
-  )
+    pull(
+      db.revisions.messagesByType('cat', {live: true, sync: true}),
+      pull.take(3), // sync plus 2
+      collectMutations( cats, {sync: true}, err  => {
+        console.log('got cats')
+        if (err && err !== true) return cb1(err)
+        t.deepEqual(cats.getLength(), 2)
+        t.deepEqual(cats.get(0)(), a2)
+        t.deepEqual(cats.get(1)(), b)
+        cb1()
+      })
+    )
 
-  append(db, [a, a1, a2, b], ()=>{})
+    pull(
+      db.revisions.messagesByType('dog', {live: true, sync: true}),
+      pull.take(3), // sync plus 3
+      collectMutations( dogs, {sync: true}, err  => {
+        console.log('got dogs')
+        console.log('err', err)
+        if (err && err !== true) return cb2(err)
+        t.deepEqual(dogs.getLength(), 0)
+        cb2()
+      })
+    )
+  })
+
+  append(db, [a1, a2, b], ()=>{})
 
   done( err =>{
     if (err) console.log(err)

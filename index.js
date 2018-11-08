@@ -49,8 +49,7 @@ module.exports = function(mutantArray, opts, cb) {
   function process(kvv) {
     if (kvv.sync) {
       if (!synced) {
-        if (buffer.length)
-          mutantArray.push(buffer)
+        buffer.forEach( e => mutantArray.push(Value(e)) )
         buffer = null
         synced = true
       }
