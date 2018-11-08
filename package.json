@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "multicb": "^1.2.2",
+    "ssb-revisions": "^1.0.1",
     "tape": "^4.9.1"
   }
 }
