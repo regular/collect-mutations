@@ -34,16 +34,16 @@ module.exports = function(mutantArray, opts, cb) {
     buffer = buffer.filter( x => !f(x) )
   }
 
-  function set(revRoot, kv) {
+  function setOrAdd(revRoot, kv) {
     const entry = find(revRoot)
     if (entry) {
-      console.log('set')
+      console.log('set', !synced ? 'buffered' : 'onservable', kv)
       if (synced) return entry.set(kv)
       return Object.assign(entry, kv)
     }
-    console.log('add')
+    console.log('add', !synced ? 'buffered' : 'onservable', kv)
     if (synced) return mutantArray.push(Value(kv))
-    buffer.push(kv)
+    buffer.push(Object.assign({}, kv))
   }
   
   function process(kvv) {
@@ -52,6 +52,7 @@ module.exports = function(mutantArray, opts, cb) {
         mutantArray.set(buffer.map( e => Value(e) ))
         buffer = null
         synced = true
+        console.log('collect-mutations sync')
       }
       return
     }
@@ -61,7 +62,7 @@ module.exports = function(mutantArray, opts, cb) {
       console.log('del')
       remove(revRoot)
     } else {
-      set(revRoot, kvv.value)
+      setOrAdd(revRoot, kvv.value)
     }
   }
 
