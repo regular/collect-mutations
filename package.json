@@ -23,5 +23,16 @@
     "multicb": "^1.2.2",
     "ssb-revisions": "^1.0.1",
     "tape": "^4.9.1"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/regular/collect-mutations.git"
+  },
+  "bugs": {
+    "url": "https://github.com/regular/collect-mutations/issues"
+  },
+  "homepage": "https://github.com/regular/collect-mutations#readme"
 }
