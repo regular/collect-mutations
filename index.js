@@ -37,11 +37,11 @@ module.exports = function(mutantArray, opts, cb) {
   function setOrAdd(revRoot, kv) {
     const entry = find(revRoot)
     if (entry) {
-      console.log('set', !synced ? 'buffered' : 'onservable', kv)
+      //console.log('set', !synced ? 'buffered' : 'onservable', kv)
       if (synced) return entry.set(kv)
       return Object.assign(entry, kv)
     }
-    console.log('add', !synced ? 'buffered' : 'onservable', kv)
+    //console.log('add', !synced ? 'buffered' : 'onservable', kv)
     if (synced) return mutantArray.push(Value(kv))
     buffer.push(Object.assign({}, kv))
   }
@@ -52,14 +52,14 @@ module.exports = function(mutantArray, opts, cb) {
         mutantArray.set(buffer.map( e => Value(e) ))
         buffer = null
         synced = true
-        console.log('collect-mutations sync')
+        //console.log('collect-mutations sync')
       }
       return
     }
     const revRoot = getRevRoot(kvv.key)
-    console.log('got revRoot', revRoot)
+    //console.log('got revRoot', revRoot)
     if (kvv.type == 'del') {
-      console.log('del')
+      //console.log('del')
       remove(revRoot)
     } else {
       setOrAdd(revRoot, kvv.value)
