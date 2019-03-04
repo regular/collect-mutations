@@ -1,6 +1,6 @@
 {
   "name": "collect-mutations",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Sink ssb-review streams into mutant arrays",
   "main": "index.js",
   "scripts": {
